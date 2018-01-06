@@ -31,7 +31,9 @@ int main()
 	TCanvas *c1 = new TCanvas("c1", "c1", 500, 500);
 	c1->SetFillColor(kBlack);
 
-	TBox *pixel[nx][ny];
+	//TBox *pixel[nx][ny];
+
+	TBox *pixel;
 
 	TF1 *prob = new TF1("prob", "gaus", 0, 1);
 
@@ -45,8 +47,10 @@ int main()
 		{
 			double y = y1 + double(j)/double(ny)*2;
 
-			pixel[i][j] = new TBox(x-1./nx+0.5,y-1./ny+0.5,x+1./nx+0.5,y+1./ny+0.5);
-			pixel[i][j]->SetFillColor(kBlack);
+			//pixel[i][j] = new TBox(x-1./nx+0.5,y-1./ny+0.5,x+1./nx+0.5,y+1./ny+0.5);
+			pixel = new TBox(x-1./nx+0.5,y-1./ny+0.5,x+1./nx+0.5,y+1./ny+0.5);
+
+			pixel->SetFillColor(kBlack);
 			//pixel[i][j]->Draw();
 
 			TVector3 grid(x, y, z);
@@ -58,19 +62,6 @@ int main()
 			double px = p.X();
 			double py = p.Y();
 			double pz = p.Z();
-
-			//Position of the box
-			double xe0 = 0;
-			double ye0 = 0;
-			double ze0 = 20;
-
-			double xe1 = 1;
-			double ye1 = 0;
-			double ze1 = 0;
-
-			double xe2 = 0;
-			double ye2 = 1;
-			double ze2 = 0;
 
 			//cout << diff.X() << " " << diff.Y() << " " << diff.Z() << endl;
 
@@ -132,11 +123,11 @@ int main()
 
 					int colval = TColor::GetColor(int(r)*255, int(g)*255, int(b)*255);
 
-					pixel[i][j]->SetFillColorAlpha(colval, prob->Eval(angle));
+					pixel->SetFillColorAlpha(colval, prob->Eval(angle));
 				}
 			}
 
-			pixel[i][j]->Draw();
+			pixel->Draw();
 		}
 	}
 
