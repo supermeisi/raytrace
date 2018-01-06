@@ -5,7 +5,7 @@
 #include <TBox.h>
 #include <TColor.h>
 
-void raytrace()
+int main()
 {
 	int nx = 200;
 	int ny = 200;
@@ -85,4 +85,6 @@ void raytrace()
 			pixel[i][j]->Draw();
 		}
 	}
+
+	c1->Print("detector.png");
 }
