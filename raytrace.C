@@ -77,7 +77,7 @@ int main()
 			TVector3 norm(0,0,-1);
 
 			//Scattering angle
-			double alpha = 0.15;
+			double alpha = 0.45;
 
 			//Calculate intersection between light rays and Disc DIRC
 			double lambda = (((xe0-x)*ye1-xe1*ye0+xe1*y)*ze2+((x-xe0)*ye2+xe2*ye0-xe2*y)*ze1+(xe1*ye2-xe2*ye1)*ze0+(xe2*ye1-xe1*ye2)*z)/((px*ye1-py*xe1)*ze2+(py*xe2-px*ye2)*ze1+pz*xe1*ye2-pz*xe2*ye1);
@@ -89,6 +89,11 @@ int main()
 			double r = 1.0;
 			double g = 0.2;
 			double b = 0.0;
+
+			TVector3 light(0., 5., 10.);
+
+			//Light source
+			TVector3 inter(x1 + lambda*px, y1 + lambda*py, z1 + lambda*pz);
 
 			if(x1 + lambda*px > -dx/2 && x1 + lambda*px < dx/2)
 			{
@@ -105,7 +110,9 @@ int main()
 
 					TVector3 refl(px, py, pz);
 
-					double angle = refl.Angle(norm);
+					TVector3 conn = light - inter;
+
+					double angle = refl.Angle(conn);
 
 					//std::cout << angle << std::endl;
 
