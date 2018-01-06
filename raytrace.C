@@ -123,7 +123,7 @@ int main()
 
 					int colval = TColor::GetColor(int(r)*255, int(g)*255, int(b)*255);
 
-					pixel->SetFillColorAlpha(colval, prob->Eval(angle));
+					pixel->SetFillColorAlpha(colval, prob->Eval(angle)/prob->GetMaximum(0,1));
 				}
 			}
 
