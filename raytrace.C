@@ -9,8 +9,8 @@
 int main()
 {
 	//Number of pixels in x and y-direction
-	int nx = 200;
-	int ny = 200;
+	int nx = 250;
+	int ny = 250;
 
 	//Position of the spectator
 	double x0 = 0;
@@ -27,6 +27,7 @@ int main()
 	double z = z1;
 
 	TCanvas *c1 = new TCanvas("c1", "c1", 500, 500);
+	c1->SetFillColor(kBlack);
 
 	TBox *pixel[nx][ny];
 
@@ -42,6 +43,7 @@ int main()
 
 			pixel[i][j] = new TBox(x-1./nx+0.5,y-1./ny+0.5,x+1./nx+0.5,y+1./ny+0.5);
 			pixel[i][j]->SetFillColor(kBlack);
+			//pixel[i][j]->Draw();
 
 			TVector3 grid(x, y, z);
 
@@ -105,7 +107,7 @@ int main()
 
 					double angle = refl.Angle(norm);
 
-					std::cout << angle << std::endl;
+					//std::cout << angle << std::endl;
 
 					prob->SetParameter(0,1);
 					prob->SetParameter(1,0);
@@ -113,11 +115,11 @@ int main()
 
 					int value = prob->Eval(angle)*255;
 
-					std::cout << value << std::endl;
+					//std::cout << value << std::endl;
 
-					int colval = TColor::GetColor(int(r*value), int(g*value), int(b*value));
+					int colval = TColor::GetColor(int(r)*255, int(g)*255, int(b)*255);
 
-					pixel[i][j]->SetFillColor(colval);
+					pixel[i][j]->SetFillColorAlpha(colval, prob->Eval(angle));
 				}
 			}
 
