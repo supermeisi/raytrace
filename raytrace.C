@@ -11,8 +11,8 @@
 int main()
 {
 	//Number of pixels in x and y-direction
-	int nx = 250;
-	int ny = 250;
+	int nx = 500;
+	int ny = 500;
 
 	//Position of the spectator
 	double x0 = 0;
@@ -117,13 +117,13 @@ int main()
 					prob->SetParameter(1,0);
 					prob->SetParameter(2,alpha);
 
-					int value = prob->Eval(angle)*255;
+					float value = prob->Eval(angle)/prob->GetMaximum(0,1);
 
-					//std::cout << value << std::endl;
-
-					int colval = TColor::GetColor(int(r)*255, int(g)*255, int(b)*255);
-
-					pixel->SetFillColorAlpha(colval, prob->Eval(angle)/prob->GetMaximum(0,1));
+					int ci = TColor::GetFreeColorIndex();
+					float r, g, b;
+					TColor::HSV2RGB(0, 1, value, r, g, b);
+					TColor *color = new TColor(ci, r, g, b);
+					pixel->SetFillColor(ci);
 				}
 			}
 
