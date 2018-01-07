@@ -28,7 +28,7 @@ int main()
 
 	double z = z1;
 
-	TCanvas *c1 = new TCanvas("c1", "c1", 500, 500);
+	TCanvas *c1 = new TCanvas("c1", "c1", nx, ny);
 	c1->SetFillColor(kBlack);
 
 	//TBox *pixel[nx][ny];
@@ -36,6 +36,7 @@ int main()
 	TBox *pixel;
 
 	TF1 *prob = new TF1("prob", "gaus", 0, 1);
+	TF1 *lamb = new TF1("lamb", "2/TMath::Pi()*cos(x)", 0, TMath::Pi()/2);
 
 	Box *box = new Box(0, 0, 20);
 
@@ -72,7 +73,7 @@ int main()
 			TVector3 norm(0,0,-1);
 
 			//Scattering angle
-			double alpha = 0.45;
+			double alpha = 0.2;
 
 			//Calculate intersection between light rays and Disc DIRC
 			//double lambda = (((xe0-x)*ye1-xe1*ye0+xe1*y)*ze2+((x-xe0)*ye2+xe2*ye0-xe2*y)*ze1+(xe1*ye2-xe2*ye1)*ze0+(xe2*ye1-xe1*ye2)*z)/((px*ye1-py*xe1)*ze2+(py*xe2-px*ye2)*ze1+pz*xe1*ye2-pz*xe2*ye1);
@@ -118,6 +119,12 @@ int main()
 					prob->SetParameter(2,alpha);
 
 					float value = prob->Eval(angle)/prob->GetMaximum(0,1);
+
+					double vallamb = lamb->Eval(angle);
+
+					value = 0.5*(vallamb+value);
+
+					//std::cout << vallamb << std::endl;
 
 					int ci = TColor::GetFreeColorIndex();
 					float r, g, b;
