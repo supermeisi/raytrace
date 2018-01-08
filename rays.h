@@ -15,6 +15,7 @@ class Rays
 		void SetPosition(TVector3 _pos) { pos = _pos; };
 
 		void AddRay(TVector3 _pos, TVector3 _dir);
+		void KillRay(int _i) { rays.erase(rays.begin()+_i); };
 
 		TVector3 GetDirection(int _i) { return rays[_i][1]; };
 		TVector3 GetPosition(int _i) { return rays[_i][0]; };
