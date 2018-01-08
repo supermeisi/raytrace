@@ -6,6 +6,7 @@
 #include <TColor.h>
 #include <TF1.h>
 
+#include "rays.h"
 #include "box.h"
 
 int main()
@@ -40,6 +41,9 @@ int main()
 
 	Box *box = new Box(0, 0, 20);
 
+	Rays *rays = new Rays();
+
+
 	for(int i = 0; i < nx; i++)
 	{
 		double x = x1 + double(i)/double(nx)*2;
@@ -55,6 +59,9 @@ int main()
 			//pixel[i][j]->Draw();
 
 			TVector3 grid(x, y, z);
+
+			rays->SetPosition(grid);
+			rays->SetDirection(grid - camera);
 
 			TVector3 p = grid - camera;
 
@@ -77,6 +84,8 @@ int main()
 
 			//Calculate intersection between light rays and Disc DIRC
 			//double lambda = (((xe0-x)*ye1-xe1*ye0+xe1*y)*ze2+((x-xe0)*ye2+xe2*ye0-xe2*y)*ze1+(xe1*ye2-xe2*ye1)*ze0+(xe2*ye1-xe1*ye2)*z)/((px*ye1-py*xe1)*ze2+(py*xe2-px*ye2)*ze1+pz*xe1*ye2-pz*xe2*ye1);
+
+			box->SetRays(*rays);
 
 			double lambda = box->GetLambda(grid, p);
 
