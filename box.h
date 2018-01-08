@@ -14,7 +14,7 @@ class Box
 		~Box();
 
 		void SetRays(Rays &_rays) { rays = _rays; };
-		double GetLambda(TVector3 _pos, TVector3 _mom);
+		double GetLambda(int _i, TVector3 _pos, TVector3 _mom);
 
 	private:
 		double xe0, ye0, ze0;

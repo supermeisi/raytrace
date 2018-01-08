@@ -14,11 +14,16 @@ class Rays
 		void SetDirection(TVector3 _dir) { dir = _dir.Unit(); };
 		void SetPosition(TVector3 _pos) { pos = _pos; };
 
-		TVector3 GetDirection() { return dir; };
-		TVector3 GetPosition() { return pos; };
+		void AddRay(TVector3 _pos, TVector3 _dir);
+
+		TVector3 GetDirection(int _i) { return rays[_i][1]; };
+		TVector3 GetPosition(int _i) { return rays[_i][0]; };
+
+		double GetNRays() { return rays.size(); }
 
 	private:
 		TVector3 pos, dir;
+		std::vector<std::vector<TVector3> > rays;
 };
 
 #endif //RAYS_H

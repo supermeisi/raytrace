@@ -19,7 +19,7 @@ Box::~Box()
 {
 }
 
-double Box::GetLambda(TVector3 _pos, TVector3 _mom)
+double Box::GetLambda(int _i, TVector3 _pos, TVector3 _mom)
 {
 	/*double x = _pos.X();
 	double y = _pos.Y();
@@ -29,8 +29,8 @@ double Box::GetLambda(TVector3 _pos, TVector3 _mom)
 	double py = _mom.Y();
 	double pz = _mom.Z();*/
 
-	TVector3 pos = rays.GetPosition();
-	TVector3 mom = rays.GetDirection();
+	TVector3 pos = rays.GetPosition(_i);
+	TVector3 mom = rays.GetDirection(_i);
 
 	double x = pos.X();
 	double y = pos.Y();
